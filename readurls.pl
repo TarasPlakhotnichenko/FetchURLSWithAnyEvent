@@ -5,16 +5,14 @@ use AnyEvent;
 use AnyEvent::HTTP;
 use Time::HiRes qw(gettimeofday tv_interval);
  
-my @urls = qw(
-	http://yandex.ru/
-	http://google.com/
-	http://tutu.ru/
-);
+my @urls = ();
 
-$userinput =  <STDIN>;
+#my $userinput=q(http://127.0.0.1 http://127.0.0.1);
+
+my $userinput =  <STDIN>;
 chomp ($userinput); 
 
-my @urls = split(/\s+/, $userinput);
+@urls = split(/\s+/, $userinput);
 
 foreach my $url (@urls) {
 $url=~s/^\s+|\s+$//g;
@@ -30,11 +28,11 @@ foreach my $url (@urls) {
 	$cv->begin;
 	http_get $url, sub {
 		my ($html) = @_;
-		print "$url received" .  $html "\n";
+		print "$url received" .  "$html\n";
 		$cv->end;
 		my $end_time = [ gettimeofday ];
         my $elapsed = tv_interval($start_time,$end_time);
-		print "$elapsed\n";
+		print "Elapsed time: $elapsed\n";
 	};
 }
  
