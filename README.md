@@ -1,2 +1,2 @@
 # FetchURLSWithAnyEvent
-#haven't done with testing yet - i don't have any facility. It's a pure scratch.
+#fetching html pages  asyncronously  with AnyEvent library
